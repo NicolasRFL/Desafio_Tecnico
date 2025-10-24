@@ -1,0 +1,50 @@
+services:
+  app:
+    build: .
+    container_name: cakephp_app
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_USER=cake_user
+      - DATABASE_PASSWORD=cake_pass
+      - DATABASE_NAME=inase_lab
+    networks:
+      - cake_network
+
+  db:
+    image: mysql:8.0
+    container_name: cakephp_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: inase_lab
+      MYSQL_USER: cake_user
+      MYSQL_PASSWORD: cake_pass
+    volumes:
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - cake_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: cakephp_phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: db
+      PMA_USER: cake_user
+      PMA_PASSWORD: cake_pass
+    ports:
+      - "8081:80"
+    networks:
+      - cake_network
+
+networks:
+  cake_network:
+
+volumes:
+  db_data:
