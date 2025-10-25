@@ -1,25 +1,18 @@
-# Imagen base con PHP 8.2 + extensiones necesarias
 FROM php:8.2-apache
 
-# Instalar extensiones de PHP que CakePHP necesita
-RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends \
-    ca-certificates libicu-dev libzip-dev unzip git \
-    && docker-php-ext-install intl pdo_mysql zip opcache \
-    && a2enmod rewrite \
+# Instalación de dependencias necesarias para intl
+RUN apt-get update && apt-get install -y \
+        libicu-dev \
+    && docker-php-ext-install intl pdo pdo_mysql \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Configurar Apache para permitir URLs amigables
-RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
+# Habilitar mod_rewrite
+RUN a2enmod rewrite
 
-# Copiar archivos del proyecto
-COPY . /var/www/html
+# Copiar configuración de Apache
+COPY apache-config.conf /etc/apache2/sites-available/000-default.conf
 
-# Instalar Composer dentro del contenedor
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+# Evitar warning ServerName
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-# Instalar dependencias del proyecto
 WORKDIR /var/www/html
-# RUN composer install --no-interaction --prefer-dist
-
-# Permisos para logs y tmp
-# RUN chown -R www-data:www-data /var/www/html/tmp /var/www/html/logs

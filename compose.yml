@@ -45,6 +45,3 @@ services:
 
 networks:
   cake_network:
-
-volumes:
-  db_data:
