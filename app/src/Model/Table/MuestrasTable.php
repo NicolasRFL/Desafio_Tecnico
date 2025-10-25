@@ -4,6 +4,9 @@ declare(strict_types=1);
 namespace App\Model\Table;
 
 use Cake\ORM\Query\SelectQuery;
+use Cake\Event\EventInterface;
+use Cake\Datasource\EntityInterface;
+use ArrayObject;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -40,6 +43,29 @@ class MuestrasTable extends Table
         $this->setTable('muestras');
         $this->setDisplayField('nro_precinto');
         $this->setPrimaryKey('id');
+
+        $this->hasMany('Resultados', [
+            'foreignKey' => 'muestra_id',
+        ]);
+
+        $this->addBehavior('Timestamp', [
+            'events' => [
+                'Model.beforeSave' => [
+                    'fecha_creacion' => 'new',
+                    'fecha_modificacion' => 'always'
+                ]
+            ]
+        ]);
+    }
+
+    public function afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+    {
+        if ($entity->isNew() && empty($entity->get('codigo_muestra'))) {
+            $fecha = $entity->get('fecha_creacion')->format('Ymd');            
+            $codigo = 'MUE-' . $fecha . '-' . str_pad((string)$entity->get('id'), 6, '0', STR_PAD_LEFT);
+            $entity->set('codigo_muestra', $codigo);
+            $this->updateAll(['codigo_muestra' => $codigo], ['id' => $entity->get('id')]);
+        }
     }
 
     /**
@@ -73,6 +99,35 @@ class MuestrasTable extends Table
             ->requirePresence('cantidad_semillas', 'create')
             ->notEmptyString('cantidad_semillas');
 
+        $validator
+            ->dateTime('fecha_creacion')
+            ->allowEmptyDateTime('fecha_creacion');
+
+        $validator
+            ->dateTime('fecha_modificacion')
+            ->allowEmptyDateTime('fecha_modificacion');
+
+        $validator
+            ->scalar('codigo_muestra')
+            ->maxLength('codigo_muestra', 20)
+            ->requirePresence('codigo_muestra', 'create')
+            ->notEmptyString('codigo_muestra')
+            ->add('codigo_muestra', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules): RulesChecker
+    {
+        $rules->add($rules->isUnique(['codigo_muestra']), ['errorField' => 'codigo_muestra']);
+
+        return $rules;
     }
 }

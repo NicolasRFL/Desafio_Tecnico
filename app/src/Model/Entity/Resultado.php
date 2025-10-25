@@ -6,18 +6,19 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Muestra Entity
+ * Resultado Entity
  *
  * @property int $id
- * @property string $nro_precinto
- * @property string $empresa
- * @property string $especie
- * @property int $cantidad_semillas
+ * @property int $muestra_id
+ * @property string $poder_germinativo
+ * @property string $pureza
+ * @property string|null $materiales_inertes
  * @property \Cake\I18n\DateTime|null $fecha_creacion
  * @property \Cake\I18n\DateTime|null $fecha_modificacion
- * @property string $codigo_muestra
+ *
+ * @property \App\Model\Entity\Muestra $muestra
  */
-class Muestra extends Entity
+class Resultado extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -29,12 +30,12 @@ class Muestra extends Entity
      * @var array<string, bool>
      */
     protected array $_accessible = [
-        'nro_precinto' => true,
-        'empresa' => true,
-        'especie' => true,
-        'cantidad_semillas' => true,
+        'muestra_id' => true,
+        'poder_germinativo' => true,
+        'pureza' => true,
+        'materiales_inertes' => true,
         'fecha_creacion' => true,
         'fecha_modificacion' => true,
-        'codigo_muestra' => true,
+        'muestra' => true,
     ];
 }

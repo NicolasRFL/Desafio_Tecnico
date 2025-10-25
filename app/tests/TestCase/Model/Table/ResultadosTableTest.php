@@ -3,20 +3,20 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\MuestrasTable;
+use App\Model\Table\ResultadosTable;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\MuestrasTable Test Case
+ * App\Model\Table\ResultadosTable Test Case
  */
-class MuestrasTableTest extends TestCase
+class ResultadosTableTest extends TestCase
 {
     /**
      * Test subject
      *
-     * @var \App\Model\Table\MuestrasTable
+     * @var \App\Model\Table\ResultadosTable
      */
-    protected $Muestras;
+    protected $Resultados;
 
     /**
      * Fixtures
@@ -24,6 +24,7 @@ class MuestrasTableTest extends TestCase
      * @var array<string>
      */
     protected array $fixtures = [
+        'app.Resultados',
         'app.Muestras',
     ];
 
@@ -35,8 +36,8 @@ class MuestrasTableTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $config = $this->getTableLocator()->exists('Muestras') ? [] : ['className' => MuestrasTable::class];
-        $this->Muestras = $this->getTableLocator()->get('Muestras', $config);
+        $config = $this->getTableLocator()->exists('Resultados') ? [] : ['className' => ResultadosTable::class];
+        $this->Resultados = $this->getTableLocator()->get('Resultados', $config);
     }
 
     /**
@@ -46,7 +47,7 @@ class MuestrasTableTest extends TestCase
      */
     protected function tearDown(): void
     {
-        unset($this->Muestras);
+        unset($this->Resultados);
 
         parent::tearDown();
     }
@@ -55,7 +56,7 @@ class MuestrasTableTest extends TestCase
      * Test validationDefault method
      *
      * @return void
-     * @link \App\Model\Table\MuestrasTable::validationDefault()
+     * @link \App\Model\Table\ResultadosTable::validationDefault()
      */
     public function testValidationDefault(): void
     {
@@ -66,7 +67,7 @@ class MuestrasTableTest extends TestCase
      * Test buildRules method
      *
      * @return void
-     * @link \App\Model\Table\MuestrasTable::buildRules()
+     * @link \App\Model\Table\ResultadosTable::buildRules()
      */
     public function testBuildRules(): void
     {

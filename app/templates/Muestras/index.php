@@ -16,6 +16,9 @@
                     <th><?= $this->Paginator->sort('empresa') ?></th>
                     <th><?= $this->Paginator->sort('especie') ?></th>
                     <th><?= $this->Paginator->sort('cantidad_semillas') ?></th>
+                    <th><?= $this->Paginator->sort('fecha_creacion') ?></th>
+                    <th><?= $this->Paginator->sort('fecha_modificacion') ?></th>
+                    <th><?= $this->Paginator->sort('codigo_muestra') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -27,6 +30,9 @@
                     <td><?= h($muestra->empresa) ?></td>
                     <td><?= h($muestra->especie) ?></td>
                     <td><?= $this->Number->format($muestra->cantidad_semillas) ?></td>
+                    <td><?= h($muestra->fecha_creacion) ?></td>
+                    <td><?= h($muestra->fecha_modificacion) ?></td>
+                    <td><?= h($muestra->codigo_muestra) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $muestra->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $muestra->id]) ?>

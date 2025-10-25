@@ -31,12 +31,24 @@
                     <td><?= h($muestra->especie) ?></td>
                 </tr>
                 <tr>
+                    <th><?= __('Codigo Muestra') ?></th>
+                    <td><?= h($muestra->codigo_muestra) ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($muestra->id) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Cantidad Semillas') ?></th>
                     <td><?= $this->Number->format($muestra->cantidad_semillas) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Fecha Creacion') ?></th>
+                    <td><?= h($muestra->fecha_creacion) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Fecha Modificacion') ?></th>
+                    <td><?= h($muestra->fecha_modificacion) ?></td>
                 </tr>
             </table>
         </div>
