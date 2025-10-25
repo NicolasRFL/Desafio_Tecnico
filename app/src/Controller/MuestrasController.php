@@ -47,11 +47,12 @@ class MuestrasController extends AppController
         if ($this->request->is('post')) {
             $muestra = $this->Muestras->patchEntity($muestra, $this->request->getData());
             if ($this->Muestras->save($muestra)) {
-                $this->Flash->success(__('The muestra has been saved.'));
+                $this->Flash->success(__('La muestra fue guardada correctamente.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The muestra could not be saved. Please, try again.'));
+            $this->log(print_r($muestra->getErrors(), true), 'debug');
+            $this->Flash->error(__('La muestra no pudo ser guardada. Por favor, inténtelo de nuevo.'));
         }
         $this->set(compact('muestra'));
     }

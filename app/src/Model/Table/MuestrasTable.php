@@ -58,13 +58,18 @@ class MuestrasTable extends Table
         ]);
     }
 
-    public function afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+    public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
     {
-        if ($entity->isNew() && empty($entity->get('codigo_muestra'))) {
-            $fecha = $entity->get('fecha_creacion')->format('Ymd');            
-            $codigo = 'MUE-' . $fecha . '-' . str_pad((string)$entity->get('id'), 6, '0', STR_PAD_LEFT);
-            $entity->set('codigo_muestra', $codigo);
-            $this->updateAll(['codigo_muestra' => $codigo], ['id' => $entity->get('id')]);
+        if ($entity->isNew() && empty($entity->codigo_muestra)) {
+            $countToday = $this->find()
+                ->where(['DATE(fecha_creacion)' => date('Y-m-d')])
+                ->count();
+
+            $entity->codigo_muestra = sprintf(
+                'MUE-%s-%04d',
+                date('Ymd'),
+                $countToday + 1
+            );
         }
     }
 
@@ -110,8 +115,7 @@ class MuestrasTable extends Table
         $validator
             ->scalar('codigo_muestra')
             ->maxLength('codigo_muestra', 20)
-            ->requirePresence('codigo_muestra', 'create')
-            ->notEmptyString('codigo_muestra')
+            ->allowEmptyString('codigo_muestra',null,'create')
             ->add('codigo_muestra', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         return $validator;

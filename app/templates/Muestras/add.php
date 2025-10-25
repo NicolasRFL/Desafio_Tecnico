@@ -21,9 +21,6 @@
                     echo $this->Form->control('empresa');
                     echo $this->Form->control('especie');
                     echo $this->Form->control('cantidad_semillas');
-                    echo $this->Form->control('fecha_creacion', ['empty' => true]);
-                    echo $this->Form->control('fecha_modificacion', ['empty' => true]);
-                    echo $this->Form->control('codigo_muestra');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
