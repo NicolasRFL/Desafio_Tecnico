@@ -24,8 +24,8 @@ class ResultadosFixture extends TestFixture
                 'poder_germinativo' => 1.5,
                 'pureza' => 1.5,
                 'materiales_inertes' => 'Lorem ipsum dolor sit amet',
-                'fecha_creacion' => '2025-10-25 00:51:05',
-                'fecha_modificacion' => '2025-10-25 00:51:05',
+                'fecha_creacion' => '2025-10-26 03:43:08',
+                'fecha_modificacion' => '2025-10-26 03:43:08',
             ],
         ];
         parent::init();

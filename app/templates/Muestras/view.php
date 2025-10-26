@@ -51,6 +51,48 @@
                     <td><?= h($muestra->fecha_modificacion) ?></td>
                 </tr>
             </table>
+            <div class="related">
+                <h4><?= __('Related Resultados') ?></h4>
+                <?php if (!empty($muestra->resultados)) : ?>
+                <div class="table-responsive">
+                    <table>
+                        <tr>
+                            <th><?= __('Id') ?></th>
+                            <th><?= __('Muestra Id') ?></th>
+                            <th><?= __('Poder Germinativo') ?></th>
+                            <th><?= __('Pureza') ?></th>
+                            <th><?= __('Materiales Inertes') ?></th>
+                            <th><?= __('Fecha Creacion') ?></th>
+                            <th><?= __('Fecha Modificacion') ?></th>
+                            <th class="actions"><?= __('Actions') ?></th>
+                        </tr>
+                        <?php foreach ($muestra->resultados as $resultado) : ?>
+                        <tr>
+                            <td><?= h($resultado->id) ?></td>
+                            <td><?= h($resultado->muestra_id) ?></td>
+                            <td><?= h($resultado->poder_germinativo) ?></td>
+                            <td><?= h($resultado->pureza) ?></td>
+                            <td><?= h($resultado->materiales_inertes) ?></td>
+                            <td><?= h($resultado->fecha_creacion) ?></td>
+                            <td><?= h($resultado->fecha_modificacion) ?></td>
+                            <td class="actions">
+                                <?= $this->Html->link(__('View'), ['controller' => 'Resultados', 'action' => 'view', $resultado->id]) ?>
+                                <?= $this->Html->link(__('Edit'), ['controller' => 'Resultados', 'action' => 'edit', $resultado->id]) ?>
+                                <?= $this->Form->postLink(
+                                    __('Delete'),
+                                    ['controller' => 'Resultados', 'action' => 'delete', $resultado->id],
+                                    [
+                                        'method' => 'delete',
+                                        'confirm' => __('Are you sure you want to delete # {0}?', $resultado->id),
+                                    ]
+                                ) ?>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+                <?php endif; ?>
+            </div>
         </div>
     </div>
 </div>

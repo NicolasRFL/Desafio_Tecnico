@@ -32,7 +32,7 @@ class MuestrasController extends AppController
      */
     public function view($id = null)
     {
-        $muestra = $this->Muestras->get($id, contain: []);
+        $muestra = $this->Muestras->get($id, contain: ['Resultados']);
         $this->set(compact('muestra'));
     }
 
@@ -47,11 +47,10 @@ class MuestrasController extends AppController
         if ($this->request->is('post')) {
             $muestra = $this->Muestras->patchEntity($muestra, $this->request->getData());
             if ($this->Muestras->save($muestra)) {
-                $this->Flash->success(__('La muestra fue guardada correctamente.'));
+                $this->Flash->success(__('La muestra ha sido guardada.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->log(print_r($muestra->getErrors(), true), 'debug');
             $this->Flash->error(__('La muestra no pudo ser guardada. Por favor, inténtelo de nuevo.'));
         }
         $this->set(compact('muestra'));
@@ -70,11 +69,11 @@ class MuestrasController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $muestra = $this->Muestras->patchEntity($muestra, $this->request->getData());
             if ($this->Muestras->save($muestra)) {
-                $this->Flash->success(__('The muestra has been saved.'));
+                $this->Flash->success(__('La muestra ha sido guardada.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The muestra could not be saved. Please, try again.'));
+            $this->Flash->error(__('La muestra no pudo ser guardada. Por favor, inténtelo de nuevo.'));
         }
         $this->set(compact('muestra'));
     }
@@ -91,9 +90,9 @@ class MuestrasController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $muestra = $this->Muestras->get($id);
         if ($this->Muestras->delete($muestra)) {
-            $this->Flash->success(__('The muestra has been deleted.'));
+            $this->Flash->success(__('La muestra ha sido eliminada.'));
         } else {
-            $this->Flash->error(__('The muestra could not be deleted. Please, try again.'));
+            $this->Flash->error(__('La muestra no pudo ser eliminada. Por favor, inténtelo de nuevo.'));
         }
 
         return $this->redirect(['action' => 'index']);

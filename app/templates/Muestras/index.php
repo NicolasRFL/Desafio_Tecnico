@@ -11,37 +11,37 @@
         <table>
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('nro_precinto') ?></th>
                     <th><?= $this->Paginator->sort('empresa') ?></th>
                     <th><?= $this->Paginator->sort('especie') ?></th>
                     <th><?= $this->Paginator->sort('cantidad_semillas') ?></th>
-                    <th><?= $this->Paginator->sort('fecha_creacion') ?></th>
-                    <th><?= $this->Paginator->sort('fecha_modificacion') ?></th>
                     <th><?= $this->Paginator->sort('codigo_muestra') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th class="actions"><?= __('Ver detalles') ?></th>
+                    <th class="actions"><?= __('Editar') ?></th>
+                    <th class="actions"><?= __('Eliminar') ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($muestras as $muestra): ?>
                 <tr>
-                    <td><?= $this->Number->format($muestra->id) ?></td>
                     <td><?= h($muestra->nro_precinto) ?></td>
                     <td><?= h($muestra->empresa) ?></td>
                     <td><?= h($muestra->especie) ?></td>
                     <td><?= $this->Number->format($muestra->cantidad_semillas) ?></td>
-                    <td><?= h($muestra->fecha_creacion) ?></td>
-                    <td><?= h($muestra->fecha_modificacion) ?></td>
                     <td><?= h($muestra->codigo_muestra) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $muestra->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $muestra->id]) ?>
+                        <?= $this->Html->link(__('Ver detalles'), ['action' => 'view', $muestra->id]) ?>
+                    </td>
+                    <td class="actions">
+                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $muestra->id]) ?>
+                    </td>
+                    <td class="actions">
                         <?= $this->Form->postLink(
-                            __('Delete'),
+                            __('Eliminar'),
                             ['action' => 'delete', $muestra->id],
                             [
                                 'method' => 'delete',
-                                'confirm' => __('Are you sure you want to delete # {0}?', $muestra->id),
+                                'confirm' => __('¿Está seguro de que desea eliminar # {0}?', $muestra->id),
                             ]
                         ) ?>
                     </td>

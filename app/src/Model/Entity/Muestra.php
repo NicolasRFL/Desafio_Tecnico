@@ -16,6 +16,8 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\DateTime|null $fecha_creacion
  * @property \Cake\I18n\DateTime|null $fecha_modificacion
  * @property string $codigo_muestra
+ *
+ * @property \App\Model\Entity\Resultado[] $resultados
  */
 class Muestra extends Entity
 {
@@ -36,5 +38,6 @@ class Muestra extends Entity
         'fecha_creacion' => true,
         'fecha_modificacion' => true,
         'codigo_muestra' => true,
+        'resultados' => true,
     ];
 }

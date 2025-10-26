@@ -25,6 +25,7 @@ class MuestrasTableTest extends TestCase
      */
     protected array $fixtures = [
         'app.Muestras',
+        'app.Resultados',
     ];
 
     /**
@@ -49,6 +50,17 @@ class MuestrasTableTest extends TestCase
         unset($this->Muestras);
 
         parent::tearDown();
+    }
+
+    /**
+     * Test beforeSave method
+     *
+     * @return void
+     * @link \App\Model\Table\MuestrasTable::beforeSave()
+     */
+    public function testBeforeSave(): void
+    {
+        $this->markTestIncomplete('Not implemented yet.');
     }
 
     /**

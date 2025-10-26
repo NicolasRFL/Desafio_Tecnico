@@ -23,6 +23,7 @@ class MuestrasControllerTest extends TestCase
      */
     protected array $fixtures = [
         'app.Muestras',
+        'app.Resultados',
     ];
 
     /**

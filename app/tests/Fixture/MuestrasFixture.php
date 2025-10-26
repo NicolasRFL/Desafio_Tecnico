@@ -24,8 +24,8 @@ class MuestrasFixture extends TestFixture
                 'empresa' => 'Lorem ipsum dolor sit amet',
                 'especie' => 'Lorem ipsum dolor sit amet',
                 'cantidad_semillas' => 1,
-                'fecha_creacion' => '2025-10-25 00:17:30',
-                'fecha_modificacion' => '2025-10-25 00:17:30',
+                'fecha_creacion' => '2025-10-26 03:42:10',
+                'fecha_modificacion' => '2025-10-26 03:42:10',
                 'codigo_muestra' => 'Lorem ipsum dolor ',
             ],
         ];

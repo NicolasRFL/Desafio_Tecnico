@@ -10,8 +10,9 @@ CREATE TABLE muestras (
   fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
   fecha_modificacion DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   codigo_muestra VARCHAR(20) NOT NULL UNIQUE,
-  INDEX (especie)
-);
+  INDEX (especie),
+  INDEX (fecha_creacion)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE resultados (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -25,4 +26,4 @@ CREATE TABLE resultados (
     FOREIGN KEY (muestra_id) REFERENCES muestras(id)
     ON DELETE CASCADE
     ON UPDATE CASCADE
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
