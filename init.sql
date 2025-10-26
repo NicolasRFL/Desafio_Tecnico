@@ -9,9 +9,9 @@ CREATE TABLE muestras (
   cantidad_semillas INT NOT NULL,
   fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
   fecha_modificacion DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  codigo_muestra VARCHAR(20) NOT NULL UNIQUE,
+  codigo_muestra VARCHAR(20) NOT NULL UNIQUE,  
   INDEX (especie),
-  INDEX (fecha_creacion)
+  INDEX (fecha_creacion),
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE resultados (
@@ -25,5 +25,7 @@ CREATE TABLE resultados (
   CONSTRAINT fk_resultados_muestra
     FOREIGN KEY (muestra_id) REFERENCES muestras(id)
     ON DELETE CASCADE
-    ON UPDATE CASCADE
+    ON UPDATE CASCADE,  
+  CONSTRAINT chk_poder_germinativo CHECK (poder_germinativo BETWEEN 0 AND 100),
+  CONSTRAINT chk_pureza CHECK (pureza BETWEEN 0 AND 100)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

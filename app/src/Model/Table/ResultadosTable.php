@@ -72,11 +72,15 @@ class ResultadosTable extends Table
 
         $validator
             ->decimal('poder_germinativo')
+            ->greaterThanOrEqual('poder_germinativo', 0, 'El poder germinativo debe ser al menos 0.')
+            ->lessThanOrEqual('poder_germinativo', 100, 'El poder germinativo no puede exceder 100.')
             ->requirePresence('poder_germinativo', 'create')
             ->notEmptyString('poder_germinativo');
 
         $validator
             ->decimal('pureza')
+            ->greaterThanOrEqual('pureza', 0, 'La pureza debe ser al menos 0.')
+            ->lessThanOrEqual('pureza', 100, 'La pureza no puede exceder 100.')
             ->requirePresence('pureza', 'create')
             ->notEmptyString('pureza');
 

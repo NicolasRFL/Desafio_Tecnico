@@ -11,8 +11,7 @@
         <table>
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('muestra_id') ?></th>
+                    <th><?= __('Código de muestra') ?></th>
                     <th><?= $this->Paginator->sort('poder_germinativo') ?></th>
                     <th><?= $this->Paginator->sort('pureza') ?></th>
                     <th><?= $this->Paginator->sort('materiales_inertes') ?></th>
@@ -24,8 +23,7 @@
             <tbody>
                 <?php foreach ($resultados as $resultado): ?>
                 <tr>
-                    <td><?= $this->Number->format($resultado->id) ?></td>
-                    <td><?= $resultado->hasValue('muestra') ? $this->Html->link($resultado->muestra->nro_precinto, ['controller' => 'Muestras', 'action' => 'view', $resultado->muestra->id]) : '' ?></td>
+                    <td><?= $resultado->hasValue('muestra') ? $this->Html->link($resultado->muestra->codigo_muestra, ['controller' => 'Muestras', 'action' => 'view', $resultado->muestra->id]) : '' ?></td>
                     <td><?= $this->Number->format($resultado->poder_germinativo) ?></td>
                     <td><?= $this->Number->format($resultado->pureza) ?></td>
                     <td><?= h($resultado->materiales_inertes) ?></td>

@@ -19,11 +19,23 @@
                 <legend><?= __('Add Resultado') ?></legend>
                 <?php
                     echo $this->Form->control('muestra_id', ['options' => $muestras]);
-                    echo $this->Form->control('poder_germinativo');
-                    echo $this->Form->control('pureza');
+                    echo $this->Form->control('poder_germinativo',
+                        [
+                            'type' => 'number', 
+                            'step' => '0.01',
+                            'min' => '0',
+                            'max' => '100',
+                            'label' => 'Poder Germinativo (%)'
+                        ]);
+                    echo $this->Form->control('pureza',
+                        [
+                            'type' => 'number',
+                            'step' => '0.01',
+                            'min' => '0',
+                            'max' => '100',
+                            'label' => 'Pureza (%)'
+                        ]);
                     echo $this->Form->control('materiales_inertes');
-                    echo $this->Form->control('fecha_creacion', ['empty' => true]);
-                    echo $this->Form->control('fecha_modificacion', ['empty' => true]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
