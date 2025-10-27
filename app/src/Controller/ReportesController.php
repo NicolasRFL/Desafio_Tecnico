@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use DateTime;
+
 class ReportesController extends AppController
 {
     public function initialize(): void
@@ -19,7 +21,7 @@ class ReportesController extends AppController
     {
         $query = $this->Muestras->find()
             ->contain(['Resultados']);
-            
+
         $especie = $this->request->getQuery('especie');
         $fechaDesde = $this->request->getQuery('desde');
         $fechaHasta = $this->request->getQuery('hasta');
@@ -28,14 +30,46 @@ class ReportesController extends AppController
             $query->where(['Muestras.especie LIKE' => "%$especie%"]);
         }
 
-        if (!empty($fechaDesde) && !empty($fechaHasta)) {
-            $query->where(function ($exp, $q) use ($fechaDesde, $fechaHasta) {
-                return $exp->between('Muestras.created', $fechaDesde, $fechaHasta);
-            });
+        $desdeDt = null;
+        $hastaDt = null;
+
+        if (!empty($fechaDesde)) {
+            try {
+                $desdeDt = new DateTime($fechaDesde);
+                $desdeDt->setTime(0, 0, 0);
+            } catch (\Exception $e) {
+                $this->Flash->error('Fecha "Desde" inválida.');
+                $desdeDt = null;
+            }
         }
 
-        $muestras = $query->all();
+        if (!empty($fechaHasta)) {
+            try {
+                $hastaDt = new DateTime($fechaHasta);
+                $hastaDt->setTime(23, 59, 59);
+            } catch (\Exception $e) {
+                $this->Flash->error('Fecha "Hasta" inválida.');
+                $hastaDt = null;
+            }
+        }
+
+        if ($desdeDt && $hastaDt) {
+            $query->where([
+                'Muestras.fecha_creacion >=' => $desdeDt->format('Y-m-d H:i:s'),
+                'Muestras.fecha_creacion <=' => $hastaDt->format('Y-m-d H:i:s'),
+            ]);
+        } elseif ($desdeDt) {
+            $query->where(['Muestras.fecha_creacion >=' => $desdeDt->format('Y-m-d H:i:s')]);
+        } elseif ($hastaDt) {
+            $query->where(['Muestras.fecha_creacion <=' => $hastaDt->format('Y-m-d H:i:s')]);
+        }
+
+        $muestras = $query->all()->toArray();
 
         $this->set(compact('muestras'));
+
+        // $muestras = $query->all();
+
+        // $this->set(compact('muestras'));
     }
 }

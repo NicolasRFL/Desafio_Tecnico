@@ -5,7 +5,7 @@
  */
 ?>
 <div class="muestras index content">
-    <?= $this->Html->link(__('New Muestra'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+    <?= $this->Html->link(__('Nueva Muestra'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Muestras') ?></h3>
     <div class="table-responsive">
         <table>
