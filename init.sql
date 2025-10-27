@@ -12,6 +12,7 @@ CREATE TABLE muestras (
   codigo_muestra VARCHAR(20) NOT NULL UNIQUE,  
   INDEX (especie),
   INDEX (fecha_creacion),
+  CONSTRAINT chk_cantidad_semillas CHECK (cantidad_semillas >= 0)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE resultados (

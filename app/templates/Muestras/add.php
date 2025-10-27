@@ -20,7 +20,7 @@
                     echo $this->Form->control('nro_precinto');
                     echo $this->Form->control('empresa');
                     echo $this->Form->control('especie');
-                    echo $this->Form->control('cantidad_semillas');
+                    echo $this->Form->control('cantidad_semillas', ['type' => 'number', 'min' => '0']);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

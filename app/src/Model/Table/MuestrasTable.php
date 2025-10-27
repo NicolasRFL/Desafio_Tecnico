@@ -101,6 +101,7 @@ class MuestrasTable extends Table
 
         $validator
             ->integer('cantidad_semillas')
+            ->greaterThanOrEqual('cantidad_semillas', 0, 'La cantidad de semillas no puede ser negativa.')
             ->requirePresence('cantidad_semillas', 'create')
             ->notEmptyString('cantidad_semillas');
 
