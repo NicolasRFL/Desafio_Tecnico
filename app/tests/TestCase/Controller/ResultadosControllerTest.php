@@ -93,7 +93,24 @@ class ResultadosControllerTest extends TestCase
      */
     public function testEdit(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+        /* Dado un registro de resultado existente */
+        $data = [
+            'poder_germinativo' => 88.8,
+            'pureza' => 90.0,
+            'materiales_inertes' => 'Impurezas moderadas',
+        ];
+
+        /* Cuando se envía el formulario de edición */
+        $this->post('/resultados/edit/1', $data);
+        $this->assertResponseSuccess();
+        $this->assertRedirectContains('/resultados');
+
+        /* Entonces el registro debe actualizarse en la base de datos */
+        $resultados = $this->getTableLocator()->get('Resultados');
+        $query = $resultados->find()->where(['id' => 1, 'poder_germinativo' => 88.8]);
+        $this->assertSame(1, $query->count());
     }
 
     /**

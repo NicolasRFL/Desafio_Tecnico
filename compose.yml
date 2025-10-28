@@ -26,7 +26,8 @@ services:
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASS}
     volumes:
-      - ./init-dev.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./init-dev.sql:/docker-entrypoint-initdb.d/00-init.sql
+      - ./desarrollo.sql:/docker-entrypoint-initdb.d/01-desarrollo.sql
     networks:
       - cake_network
 

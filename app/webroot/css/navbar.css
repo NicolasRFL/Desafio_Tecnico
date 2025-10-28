@@ -42,6 +42,6 @@
 
 .nav .links a:hover,
 .nav .links a.active {
-    background-color: #00aaff;
+    background-color: var(--color-links-active);
     color: #fff;
 }

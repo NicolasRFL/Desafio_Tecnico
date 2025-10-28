@@ -14,7 +14,7 @@
  * @var \App\View\AppView $this
  */
 
-$cakeDescription = 'CakePHP: the rapid development php framework';
+$cakeDescription = 'INASE - Instituto Nacional de Semillas';
 ?>
 <!DOCTYPE html>
 <html>

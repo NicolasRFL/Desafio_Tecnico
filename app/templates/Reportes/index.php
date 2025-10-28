@@ -3,12 +3,16 @@
 <h1>Reporte de Muestras</h1>
 
 <form method="get">
-    <label>Especie:</label>
-    <input type="text" name="especie" value="<?= h($this->request->getQuery('especie')) ?>">
-    <label>Desde:</label>
-    <input type="date" name="desde">
-    <label>Hasta:</label>
-    <input type="date" name="hasta">
+    <div style="flex-direction: column; gap: 10px; margin-bottom: 20px;">
+        <label>Especie:</label>
+        <input type="text" name="especie" value="<?= h($this->request->getQuery('especie')) ?>">
+        <div style="flex-direction: row; gap: 10px; display: inline-flex;">
+            <label>Desde:</label>
+            <input type="date" name="desde">
+            <label>Hasta:</label>
+            <input type="date" name="hasta">
+        </div>
+    </div>
     <button type="submit">Filtrar</button>
 </form>
 
@@ -21,6 +25,7 @@
             <th>Poder germinativo</th>
             <th>Pureza</th>
             <th>Materiales inertes</th>
+            <th>Fecha de creación de resultado</th>
         </tr>
     </thead>
     <tbody>
@@ -33,6 +38,7 @@
                 <td><?= h($resultado->poder_germinativo) ?>%</td>
                 <td><?= h($resultado->pureza) ?>%</td>
                 <td><?= h($resultado->materiales_inertes) ?></td>
+                <td><?= h($resultado->fecha_creacion->format('Y-m-d')) ?></td>
             </tr>
             <?php endforeach; ?>
         <?php endforeach; ?>

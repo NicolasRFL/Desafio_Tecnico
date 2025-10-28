@@ -119,6 +119,17 @@ class MuestrasControllerTest extends TestCase
      */
     public function testDelete(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+        /* Dado un registro de muestra existente */
+        /* Cuando se envía la solicitud de eliminación */
+        $this->delete('/muestras/delete/1');
+        $this->assertResponseSuccess();
+        $this->assertRedirectContains('/muestras');
+
+        /* Entonces el registro no debe existir en la base de datos */
+        $muestras = $this->getTableLocator()->get('Muestras');
+        $query = $muestras->find()->where(['id' => 1]);
+        $this->assertSame(0, $query->count());
     }
 }
