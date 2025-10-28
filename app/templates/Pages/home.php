@@ -21,7 +21,6 @@ use Cake\Error\Debugger;
 use Cake\Http\Exception\NotFoundException;
 ?>
 <div class="home-container">
-    <h1><?= h($title) ?></h1>
     <h1>Sistema de gestión de muestras y resultados de INASE.</h1>
 
     <h2>Descripción</h2>

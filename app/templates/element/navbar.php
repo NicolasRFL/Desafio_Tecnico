@@ -3,7 +3,7 @@ $current = strtolower($this->request->getParam('controller'));
 ?>
 <?= $this->Html->css('navbar') ?>
 <nav class="nav">
-    <a class="brand" href="<?= $this->Url->build('/') ?>">INASE</a>
+    <a class="brand" href="<?= $this->Url->build('/') ?>"><img src="<?= $this->Url->build('/img/logo.png') ?>" alt="INASE"></a>
     <div class="links">
         <?= $this->Html->link(
             'Muestras',

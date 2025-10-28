@@ -4,6 +4,7 @@
  * @var \App\Model\Entity\Muestra $muestra
  */
 ?>
+<h1>Detalle de la Muestra</h1>
 <div class="row">
     <aside class="column">
         <div class="side-nav">

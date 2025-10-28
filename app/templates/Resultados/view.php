@@ -4,6 +4,7 @@
  * @var \App\Model\Entity\Resultado $resultado
  */
 ?>
+<h1>Detalle del Resultado</h1>
 <div class="row">
     <aside class="column">
         <div class="side-nav">
