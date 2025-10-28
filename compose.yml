@@ -10,8 +10,8 @@ services:
       - db
     environment:
       - DATABASE_HOST=db
-      - DATABASE_USER=cake_user
-      - DATABASE_PASSWORD=cake_pass
+      - DATABASE_USER=${DB_USER}
+      - DATABASE_PASSWORD=${DB_PASS}
       - DATABASE_NAME=inase_lab
     networks:
       - cake_network
@@ -21,12 +21,12 @@ services:
     container_name: cakephp_db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_ROOT_PASSWORD: ${ROOT_PASS}
       MYSQL_DATABASE: inase_lab
-      MYSQL_USER: cake_user
-      MYSQL_PASSWORD: cake_pass
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./init-dev.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - cake_network
 
@@ -36,8 +36,8 @@ services:
     restart: always
     environment:
       PMA_HOST: db
-      PMA_USER: cake_user
-      PMA_PASSWORD: cake_pass
+      PMA_USER: ${DB_USER}
+      PMA_PASSWORD: ${DB_PASS}
     ports:
       - "8081:80"
     networks:

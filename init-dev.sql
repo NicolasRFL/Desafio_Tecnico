@@ -30,3 +30,9 @@ CREATE TABLE resultados (
   CONSTRAINT chk_poder_germinativo CHECK (poder_germinativo BETWEEN 0 AND 100),
   CONSTRAINT chk_pureza CHECK (pureza BETWEEN 0 AND 100)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Base de test
+CREATE DATABASE IF NOT EXISTS inase_lab_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+GRANT ALL PRIVILEGES ON inase_lab_test.* TO 'cake_user'@'%';
+FLUSH PRIVILEGES;
+USE inase_lab_test;
