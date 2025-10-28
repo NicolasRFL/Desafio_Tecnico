@@ -60,7 +60,17 @@ class ResultadosTableTest extends TestCase
      */
     public function testValidationDefault(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        /* Dado un nuevo registro de resultado con datos válidos */
+        $data = [
+        'muestra_id' => 1,
+        'poder_germinativo' => 95.5,
+        'pureza' => 99.9,
+        'materiales_inertes' => 'Arena',
+        ];
+        /* Cuando se valida el registro */
+        $resultado = $this->Resultados->newEntity($data);
+        /* Entonces no debe haber errores de validación */
+        $this->assertEmpty($resultado->getErrors(), 'No debe haber errores de validación con datos válidos');
     }
 
     /**
@@ -71,6 +81,47 @@ class ResultadosTableTest extends TestCase
      */
     public function testBuildRules(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        /* Dado un nuevo registro de resultado con muestra_id inválido */
+        $data = [
+        'muestra_id' => 1,
+        'poder_germinativo' => 150,
+        'pureza' => 90,
+        ];
+
+        /* Cuando se valida el registro */
+        $resultado = $this->Resultados->newEntity($data);
+        /* Entonces debe haber errores de validación */
+        $this->assertArrayHasKey('poder_germinativo', $resultado->getErrors());
+    }
+
+    public function testValidacionPurezaFueraDeRango(): void
+    {
+        /* Dado un nuevo registro de resultado con pureza fuera de rango */
+        $data = [
+        'muestra_id' => 1,
+        'poder_germinativo' => 80,
+        'pureza' => -5,
+        ];
+
+        /* Cuando se valida el registro */
+        $resultado = $this->Resultados->newEntity($data);
+        /* Entonces debe haber errores de validación */
+        $this->assertArrayHasKey('pureza', $resultado->getErrors());
+    }
+
+    public function testValidacionMaterialesInertesTooLong(): void
+    {
+        /* Dado un nuevo registro de resultado con materiales_inertes demasiado largo */
+        $data = [
+        'muestra_id' => 1,
+        'poder_germinativo' => 80,
+        'pureza' => 80,
+        'materiales_inertes' => str_repeat('a', 300),
+        ];
+
+        /* Cuando se valida el registro */
+        $resultado = $this->Resultados->newEntity($data);
+        /* Entonces debe haber errores de validación */
+        $this->assertArrayHasKey('materiales_inertes', $resultado->getErrors());
     }
 }

@@ -28,6 +28,16 @@ class MuestrasFixture extends TestFixture
                 'fecha_modificacion' => '2025-10-26 03:42:10',
                 'codigo_muestra' => 'Lorem ipsum dolor ',
             ],
+            [
+            'id' => 2,
+            'nro_precinto' => 'ABC123',
+            'empresa' => 'Semillas SA',
+            'especie' => 'Trigo',
+            'cantidad_semillas' => 100,
+            'codigo_muestra' => 'MUE-20251027-0001',
+            'fecha_creacion' => '2025-10-27 10:00:00',
+            'fecha_modificacion' => '2025-10-27 10:00:00',
+            ],
         ];
         parent::init();
     }

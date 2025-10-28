@@ -34,7 +34,9 @@ class ResultadosControllerTest extends TestCase
      */
     public function testIndex(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->get('/resultados');
+        $this->assertResponseOk();
+        $this->assertResponseContains('Resultados');
     }
 
     /**
@@ -45,7 +47,13 @@ class ResultadosControllerTest extends TestCase
      */
     public function testView(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        /* Dado un registro de resultado existente */
+        $this->get('/resultados/view/1');
+
+        /* Cuando se visualiza el detalle del resultado */
+        $this->assertResponseOk();
+        /* Entonces debe mostrarse la información del resultado */
+        $this->assertResponseContains('Detalle del Resultado');
     }
 
     /**
@@ -56,7 +64,25 @@ class ResultadosControllerTest extends TestCase
      */
     public function testAdd(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+        /* Dado un nuevo registro de resultado válido */
+        $data = [
+            'muestra_id' => 1,
+            'poder_germinativo' => 95.5,
+            'pureza' => 97.2,
+            'materiales_inertes' => 'Pequeñas impurezas',
+        ];
+
+        /* Cuando se envía el formulario de adición */
+        $this->post('/resultados/add', $data);
+        $this->assertResponseSuccess();
+        $this->assertRedirectContains('/resultados');
+
+        /* Entonces el registro debe existir en la base de datos */
+        $resultados = $this->getTableLocator()->get('Resultados');
+        $query = $resultados->find()->where(['poder_germinativo' => 95.5]);
+        $this->assertSame(1, $query->count());
     }
 
     /**
@@ -78,6 +104,15 @@ class ResultadosControllerTest extends TestCase
      */
     public function testDelete(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+        /* Cuando se envía el formulario de eliminación */
+        $this->delete('/resultados/delete/1');
+        $this->assertRedirectContains('/resultados');
+
+        /* Entonces el registro no debe existir en la base de datos */
+        $resultados = $this->getTableLocator()->get('Resultados');
+        $query = $resultados->find()->where(['id' => 1]);
+        $this->assertSame(0, $query->count());
     }
 }
