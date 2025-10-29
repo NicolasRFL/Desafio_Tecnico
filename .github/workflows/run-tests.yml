@@ -10,29 +10,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout del código
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Crear archivo .env con variables de entorno
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: intl, mbstring, pdo_mysql
+          tools: composer:v2
+
+      - name: Install Composer Dependencies
         run: |
-          echo "ROOT_PASS=${{ secrets.ROOT_PASS }}" >> .env
-          echo "DB_USER=${{ secrets.DB_USER }}" >> .env
-          echo "DB_PASS=${{ secrets.DB_PASS }}" >> .env
+          cd app
+          composer install --no-interaction --no-progress
 
-      - name: Configurar Docker Compose
-        run: docker compose up -d --build
+      - name: Create .env file (if needed)
+        run: cp app/config/.env.example app/config/.env
 
-      - name: Esperar a que la base de datos esté lista
+      - name: Run CakePHP Tests
         run: |
-          echo "Esperando a que MySQL esté disponible..."
-          until docker compose exec db mysqladmin ping -h\"db\" --silent; do
-            sleep 2
-          done
-          echo "MySQL está listo."
-
-      - name: Ejecutar tests dentro del contenedor
-        run: docker compose exec app bash -c './runtests.sh'
-
-      - name: Detener contenedores
-        if: always()
-        run: docker compose down
+          cd app
+          chmod +x bin/cake vendor/bin/phpunit
+          ./bin/cake migrations migrate --connection test
+          vendor/bin/phpunit
