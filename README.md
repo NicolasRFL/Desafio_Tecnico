@@ -2,8 +2,6 @@
 
 Este repositorio contiene la aplicación de carga de Semillas para el laboratorio de INASE.
 
----
-
 ## Levantar el proyecto localmente
 
 ### Requisitos
@@ -15,19 +13,22 @@ Este repositorio contiene la aplicación de carga de Semillas para el laboratori
 DB_USER=usuario
 DB_PASS=contraseña
 ROOT_PASS=rootpassword
+```
 
 # Pasos para levantar la aplicación
 
 ## Clonar el repositorio:
 
-git clone https://github.com/usuario/nombre-del-proyecto.git
-cd nombre-del-proyecto
+git clone https://github.com/NicolasRFL/Desafio_Tecnico.git
+
+cd Desafio_Tecnico
 
 
 ## Levantar los contenedores:
 
+```text
 docker compose up --build
-
+```
 
 ## Esto iniciará los servicios:
 
@@ -41,7 +42,9 @@ Nota: La base de datos se inicializa automáticamente usando los scripts init-de
 
 ## Ejecutar tests de modelo (opcional):
 
+```text
 docker compose exec app bash -c './runtests.sh'
+```
 
 # Base de datos de ejemplo
 
