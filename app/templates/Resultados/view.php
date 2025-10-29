@@ -8,7 +8,7 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
+            <h4 class="heading"><?= __('Acciones') ?></h4>
             <?= $this->Html->link(__('Editar Resultado'), ['action' => 'edit', $resultado->muestra_id], ['class' => 'side-nav-item']) ?>
             <?= $this->Form->postLink(__('Eliminar Resultado'), ['action' => 'delete', $resultado->muestra_id], ['confirm' => __('¿Estas seguro de que deseas eliminar este resultado?', $resultado->muestra_id), 'class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('Listar Resultados'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
