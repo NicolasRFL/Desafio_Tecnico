@@ -12,7 +12,7 @@
             <?= $this->Form->postLink(
                 __('Delete'),
                 ['action' => 'delete', $resultado->muestra_id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $resultado->muestra_id), 'class' => 'side-nav-item']
+                ['confirm' => __('¿Estas seguro de que deseas eliminar este resultado?', $resultado->muestra_id), 'class' => 'side-nav-item']
             ) ?>
             <?= $this->Html->link(__('List Resultados'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
@@ -28,7 +28,7 @@
                     echo $this->Form->control('materiales_inertes');
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->button(__('Guardar')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

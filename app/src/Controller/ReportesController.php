@@ -28,7 +28,7 @@ class ReportesController extends AppController
         $fechaHasta = $this->request->getQuery('hasta');
 
         if (!empty($especie)) {
-            $query->where(['Muestras.especie LIKE' => $query->newExpr()->add(['Muestras.especie LIKE' => '%' . $especie . '%'])]);
+            $query->where(['Muestras.especie LIKE' => '%' . $especie . '%']);
         }
 
         $desdeDt = null;
