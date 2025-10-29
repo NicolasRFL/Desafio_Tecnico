@@ -1,0 +1,38 @@
+name: Ejecutar tests del proyecto
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Crear archivo .env con variables de entorno
+        run: |
+          echo "ROOT_PASS=${{ secrets.ROOT_PASS }}" >> .env
+          echo "DB_USER=${{ secrets.DB_USER }}" >> .env
+          echo "DB_PASS=${{ secrets.DB_PASS }}" >> .env
+
+      - name: Configurar Docker Compose
+        run: docker compose up -d --build
+
+      - name: Esperar a que la base de datos esté lista
+        run: |
+          echo "Esperando a que MySQL esté disponible..."
+          until docker compose exec db mysqladmin ping -h\"db\" --silent; do
+            sleep 2
+          done
+          echo "MySQL está listo."
+
+      - name: Ejecutar tests dentro del contenedor
+        run: docker compose exec app bash -c './runtests.sh'
+
+      - name: Detener contenedores
+        if: always()
+        run: docker compose down

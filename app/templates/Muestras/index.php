@@ -29,20 +29,21 @@
                     <td><?= h($muestra->especie) ?></td>
                     <td><?= $this->Number->format($muestra->cantidad_semillas) ?></td>
                     <td><?= h($muestra->codigo_muestra) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('Ver detalles'), ['action' => 'view', $muestra->id]) ?>
+                    <td>
+                        <?= $this->Html->link(__('Ver'), ['action' => 'view', $muestra->id], ['class' => 'button']) ?>
                     </td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $muestra->id]) ?>
+                    <td>
+                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $muestra->id], ['class' => 'button']) ?>
                     </td>
-                    <td class="actions">
+                    <td>
                         <?= $this->Form->postLink(
                             __('Eliminar'),
                             ['action' => 'delete', $muestra->id],
                             [
                                 'method' => 'delete',
                                 'confirm' => __('¿Está seguro de que desea eliminar # {0}?', $muestra->id),
-                            ]
+                                'class' => 'button'
+                            ]                            
                         ) ?>
                     </td>
                 </tr>
