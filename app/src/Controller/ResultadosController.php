@@ -54,7 +54,11 @@ class ResultadosController extends AppController
             }
             $this->Flash->error(__('The resultado could not be saved. Please, try again.'));
         }
-        $muestras = $this->Resultados->Muestras->find('list', limit: 200)->all();
+        $usedMuestras = $this->Resultados->find('list',keyField:'muestra_id',valueField:'muestra_id')->toArray();
+
+        $muestras = $this->Resultados->Muestras->find('list',keyField:'id',valueField:'codigo_muestra')
+        ->whereNotInList('id', $usedMuestras)
+        ->toArray();
         $this->set(compact('resultado', 'muestras'));
     }
 

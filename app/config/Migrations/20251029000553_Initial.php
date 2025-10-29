@@ -61,9 +61,13 @@ class Initial extends BaseMigration
                 $this->index('especie')
                     ->setName('especie')
             )
+            ->addIndex(
+                $this->index('fecha_creacion')
+                    ->setName('fecha_creacion')
+            )
             ->create();
 
-        $this->table('resultados')
+        $this->table('resultados', ['id' => false, 'primary_key' => ['muestra_id']])
             ->addColumn('muestra_id', 'integer', [
                 'default' => null,
                 'limit' => null,
@@ -99,10 +103,6 @@ class Initial extends BaseMigration
                 'limit' => null,
                 'null' => true,
             ])
-            ->addIndex(
-                $this->index('muestra_id')
-                    ->setName('fk_resultados_muestra')
-            )
             ->create();
 
         $this->table('resultados')

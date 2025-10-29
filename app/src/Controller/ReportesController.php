@@ -7,10 +7,11 @@ use DateTime;
 
 class ReportesController extends AppController
 {
+    private $Muestras = null;
     public function initialize(): void
     {
         parent::initialize();
-        $this->Muestras = $this->fetchTable('Muestras');
+        $this->Muestras =  $this->getTableLocator()->get('Muestras');
     }
     /**
      * Index method
@@ -54,22 +55,23 @@ class ReportesController extends AppController
         }
 
         if ($desdeDt && $hastaDt) {
-            $query->where([
-                'Muestras.fecha_creacion >=' => $desdeDt->format('Y-m-d H:i:s'),
-                'Muestras.fecha_creacion <=' => $hastaDt->format('Y-m-d H:i:s'),
+            $query->matching('Resultados', function ($q) use ($desdeDt, $hastaDt) {
+            return $q->where([
+            'Resultados.fecha_creacion >=' => $desdeDt->format('Y-m-d H:i:s'),
+            'Resultados.fecha_creacion <=' => $hastaDt->format('Y-m-d H:i:s'),
             ]);
+            });
         } elseif ($desdeDt) {
-            $query->where(['Muestras.fecha_creacion >=' => $desdeDt->format('Y-m-d H:i:s')]);
+            $query->matching('Resultados', function ($q) use ($desdeDt) {
+            return $q->where(['Resultados.fecha_creacion >=' => $desdeDt->format('Y-m-d H:i:s')]);
+            });
         } elseif ($hastaDt) {
-            $query->where(['Muestras.fecha_creacion <=' => $hastaDt->format('Y-m-d H:i:s')]);
+            $query->matching('Resultados', function ($q) use ($hastaDt) {
+            return $q->where(['Resultados.fecha_creacion <=' => $hastaDt->format('Y-m-d H:i:s')]);
+            });
         }
-
-        $muestras = $query->all()->toArray();
-
+            
+        $muestras = $query->all()->toArray(); 
         $this->set(compact('muestras'));
-
-        // $muestras = $query->all();
-
-        // $this->set(compact('muestras'));
     }
 }

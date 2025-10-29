@@ -11,8 +11,8 @@
             <h4 class="heading"><?= __('Actions') ?></h4>
             <?= $this->Form->postLink(
                 __('Delete'),
-                ['action' => 'delete', $resultado->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $resultado->id), 'class' => 'side-nav-item']
+                ['action' => 'delete', $resultado->muestra_id],
+                ['confirm' => __('Are you sure you want to delete # {0}?', $resultado->muestra_id), 'class' => 'side-nav-item']
             ) ?>
             <?= $this->Html->link(__('List Resultados'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
@@ -23,7 +23,6 @@
             <fieldset>
                 <legend><?= __('Edit Resultado') ?></legend>
                 <?php
-                    echo $this->Form->control('muestra_id', ['options' => $muestras]);
                     echo $this->Form->control('poder_germinativo');
                     echo $this->Form->control('pureza');
                     echo $this->Form->control('materiales_inertes');

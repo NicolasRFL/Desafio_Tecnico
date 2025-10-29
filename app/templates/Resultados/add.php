@@ -18,7 +18,12 @@
             <fieldset>
                 <legend><?= __('Add Resultado') ?></legend>
                 <?php
-                    echo $this->Form->control('muestra_id', ['options' => $muestras]);
+                    echo $this->Form->control('id', [
+                        'name' => 'muestra_id',
+                        'options' => $muestras,
+                        'empty' => __('Seleccione una muestra'),
+                        'label' => __('Código de Muestra'),
+                    ]);
                     echo $this->Form->control('poder_germinativo',
                         [
                             'type' => 'number', 

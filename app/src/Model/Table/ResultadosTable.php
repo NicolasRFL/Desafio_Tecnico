@@ -40,8 +40,8 @@ class ResultadosTable extends Table
         parent::initialize($config);
 
         $this->setTable('resultados');
-        $this->setDisplayField('id');
-        $this->setPrimaryKey('id');
+        $this->setDisplayField('muestra_id');
+        $this->setPrimaryKey('muestra_id');
 
         $this->belongsTo('Muestras', [
             'foreignKey' => 'muestra_id',

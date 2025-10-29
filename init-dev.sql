@@ -16,8 +16,7 @@ CREATE TABLE muestras (
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE resultados (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  muestra_id INT NOT NULL,
+  muestra_id INT PRIMARY KEY,
   poder_germinativo DECIMAL(5,2) NOT NULL,
   pureza DECIMAL(5,2) NOT NULL,
   materiales_inertes VARCHAR(255),

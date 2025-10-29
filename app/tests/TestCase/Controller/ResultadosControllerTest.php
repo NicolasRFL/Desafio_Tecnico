@@ -109,7 +109,7 @@ class ResultadosControllerTest extends TestCase
 
         /* Entonces el registro debe actualizarse en la base de datos */
         $resultados = $this->getTableLocator()->get('Resultados');
-        $query = $resultados->find()->where(['id' => 1, 'poder_germinativo' => 88.8]);
+        $query = $resultados->find()->where(['muestra_id' => 1, 'poder_germinativo' => 88.8]);
         $this->assertSame(1, $query->count());
     }
 
@@ -129,7 +129,7 @@ class ResultadosControllerTest extends TestCase
 
         /* Entonces el registro no debe existir en la base de datos */
         $resultados = $this->getTableLocator()->get('Resultados');
-        $query = $resultados->find()->where(['id' => 1]);
+        $query = $resultados->find()->where(['muestra_id' => 1]);
         $this->assertSame(0, $query->count());
     }
 }
