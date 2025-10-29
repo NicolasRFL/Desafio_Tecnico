@@ -2,19 +2,17 @@ services:
   app:
     build: .
     container_name: cakephp_app
+    volumes:
+      - ./app:/var/www/html/app               
+      - cakephp_vendor:/var/www/html/app/vendor
     ports:
       - "8080:80"
-    volumes:
-      - .:/var/www/html
     depends_on:
-      - db
-    environment:
-      - DATABASE_HOST=db
-      - DATABASE_USER=${DB_USER}
-      - DATABASE_PASSWORD=${DB_PASS}
-      - DATABASE_NAME=inase_lab
-    networks:
-      - cake_network
+      db:
+        condition: service_healthy
+    environment:      
+      SECURITY_SALT: "${SECURITY_SALT}"
+      DATABASE_URL: "mysql://${DB_USER}:${DB_PASS}@db:3306/inase_lab"
 
   db:
     image: mysql:8.0
@@ -27,9 +25,12 @@ services:
       MYSQL_PASSWORD: ${DB_PASS}
     volumes:
       - ./init-dev.sql:/docker-entrypoint-initdb.d/00-init.sql
-      - ./desarrollo.sql:/docker-entrypoint-initdb.d/01-desarrollo.sql
-    networks:
-      - cake_network
+      - ./desarrollo.sql:/docker-entrypoint-initdb.d/01-desarrollo.sql    
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -41,8 +42,6 @@ services:
       PMA_PASSWORD: ${DB_PASS}
     ports:
       - "8081:80"
-    networks:
-      - cake_network
 
-networks:
-  cake_network:
+volumes:
+  cakephp_vendor:

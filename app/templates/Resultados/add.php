@@ -16,7 +16,7 @@
         <div class="resultados form content">
             <?= $this->Form->create($resultado) ?>
             <fieldset>
-                <legend><?= __('Add Resultado') ?></legend>
+                <legend><?= __('Crear Resultado') ?></legend>
                 <?php
                     echo $this->Form->control('id', [
                         'name' => 'muestra_id',

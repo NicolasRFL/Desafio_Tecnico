@@ -28,7 +28,7 @@ class ReportesController extends AppController
         $fechaHasta = $this->request->getQuery('hasta');
 
         if (!empty($especie)) {
-            $query->where(['Muestras.especie LIKE' => "%$especie%"]);
+            $query->where(['Muestras.especie LIKE' => $query->newExpr()->add(['Muestras.especie LIKE' => '%' . $especie . '%'])]);
         }
 
         $desdeDt = null;
@@ -53,7 +53,7 @@ class ReportesController extends AppController
                 $hastaDt = null;
             }
         }
-
+        
         if ($desdeDt && $hastaDt) {
             $query->matching('Resultados', function ($q) use ($desdeDt, $hastaDt) {
             return $q->where([
@@ -70,7 +70,8 @@ class ReportesController extends AppController
             return $q->where(['Resultados.fecha_creacion <=' => $hastaDt->format('Y-m-d H:i:s')]);
             });
         }
-            
+        
+        
         $muestras = $query->all()->toArray(); 
         $this->set(compact('muestras'));
     }

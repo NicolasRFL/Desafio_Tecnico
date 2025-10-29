@@ -61,9 +61,9 @@
                     <td><?= h($muestra->fecha_modificacion) ?></td>
                 </tr>
             </table>
-            <div class="related">
-                <h4><?= __('Resultado de análisis') ?></h4>
+            <div class="related">                
                 <?php if (!empty($muestra->resultados)) : ?>
+                <h4><?= __('Resultado de análisis') ?></h4>
                 <div class="table-responsive">
                     <table>
                         <tr>
@@ -72,7 +72,9 @@
                             <th><?= __('Materiales Inertes') ?></th>
                             <th><?= __('Fecha Creacion') ?></th>
                             <th><?= __('Fecha Modificacion') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
+                            <th class="actions"><?= __('Ver') ?></th>
+                            <th class="actions"><?= __('Editar') ?></th>
+                            <th class="actions"><?= __('Eliminar') ?></th>
                         </tr>
                         <?php foreach ($muestra->resultados as $resultado) : ?>
                         <tr>
@@ -81,15 +83,20 @@
                             <td><?= h($resultado->materiales_inertes) ?></td>
                             <td><?= h($resultado->fecha_creacion) ?></td>
                             <td><?= h($resultado->fecha_modificacion) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Resultados', 'action' => 'view', $resultado->id], ['class' => 'button']) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Resultados', 'action' => 'edit', $resultado->id]) ?>
+                            <td>
+                                <?= $this->Html->link(__('Ver'), ['controller' => 'Resultados', 'action' => 'view', $resultado->muestra_id], ['class' => 'button']) ?>
+                            </td>
+                            <td>
+                                <?= $this->Html->link(__('Editar'), ['controller' => 'Resultados', 'action' => 'edit', $resultado->muestra_id], ['class' => 'button']) ?>
+                            </td>
+                            <td>
                                 <?= $this->Form->postLink(
-                                    __('Delete'),
-                                    ['controller' => 'Resultados', 'action' => 'delete', $resultado->id],
+                                    __('Eliminar'),
+                                    ['controller' => 'Resultados', 'action' => 'delete', $resultado->muestra_id],
                                     [
                                         'method' => 'delete',
-                                        'confirm' => __('Are you sure you want to delete # {0}?', $resultado->id),
+                                        'confirm' => __('¿Está seguro de que desea eliminar el resultado para la muestra {0}?', $muestra->codigo_muestra),
+                                        'class' => 'button' 
                                     ]
                                 ) ?>
                             </td>

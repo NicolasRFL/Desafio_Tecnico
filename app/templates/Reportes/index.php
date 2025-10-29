@@ -38,7 +38,7 @@
                 <td><?= h($resultado->poder_germinativo) ?>%</td>
                 <td><?= h($resultado->pureza) ?>%</td>
                 <td><?= h($resultado->materiales_inertes) ?></td>
-                <td><?= h($resultado->fecha_creacion->format('Y-m-d')) ?></td>
+                <td><?= h($resultado->fecha_creacion->format('d/m/Y') ) ?></td>
             </tr>
             <?php endforeach; ?>
         <?php endforeach; ?>

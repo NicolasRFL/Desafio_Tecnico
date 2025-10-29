@@ -22,8 +22,8 @@ VALUES
 -- Datos de ejemplo para la tabla `resultados`
 INSERT INTO resultados (muestra_id, poder_germinativo, pureza, materiales_inertes,fecha_creacion)
 VALUES
-(1, 95.5, 98.2, 'Paja y restos menores', '2024-10-10 14:30:00'),
-(2, 88.0, 96.7, 'Tierra y restos de hojas', '2024-10-12 09:15:00'),
-(3, 91.2, 99.1, 'Muy pocos restos visibles','2024-10-15 11:45:00'),
-(4, 93.8, 97.5, 'Restos de paja y tierra','2024-10-18 16:20:00'),
-(5, 85.6, 95.4, 'Restos de semillas dañadas','2024-10-20 10:00:00');
+(1, 95.5, 98.2, 'Paja y restos menores', '2025-10-10 14:30:00'),
+(2, 88.0, 96.7, 'Tierra y restos de hojas', '2025-10-12 09:15:00'),
+(3, 91.2, 99.1, 'Muy pocos restos visibles','2025-10-15 11:45:00'),
+(4, 93.8, 97.5, 'Restos de paja y tierra','2025-10-18 16:20:00'),
+(5, 85.6, 95.4, 'Restos de semillas dañadas','2025-10-20 10:00:00');

@@ -26,8 +26,6 @@
                     echo $this->Form->control('poder_germinativo');
                     echo $this->Form->control('pureza');
                     echo $this->Form->control('materiales_inertes');
-                    echo $this->Form->control('fecha_creacion', ['empty' => true]);
-                    echo $this->Form->control('fecha_modificacion', ['empty' => true]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

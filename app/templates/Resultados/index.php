@@ -5,7 +5,7 @@
  */
 ?>
 <div class="resultados index content">
-    <?= $this->Html->link(__('New Resultado'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+    <?= $this->Html->link(__('Nuevo Resultado'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Resultados') ?></h3>
     <div class="table-responsive">
         <table>
@@ -17,7 +17,9 @@
                     <th><?= $this->Paginator->sort('materiales_inertes') ?></th>
                     <th><?= $this->Paginator->sort('fecha_creacion') ?></th>
                     <th><?= $this->Paginator->sort('fecha_modificacion') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th class="actions"><?= __('Ver') ?></th>
+                    <th class="actions"><?= __('Editar') ?></th>
+                    <th class="actions"><?= __('Eliminar') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -27,17 +29,22 @@
                     <td><?= $this->Number->format($resultado->poder_germinativo) ?></td>
                     <td><?= $this->Number->format($resultado->pureza) ?></td>
                     <td><?= h($resultado->materiales_inertes) ?></td>
-                    <td><?= h($resultado->fecha_creacion) ?></td>
-                    <td><?= h($resultado->fecha_modificacion) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $resultado->muestra_id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $resultado->muestra_id]) ?>
+                    <td><?= h($resultado->fecha_creacion->format('d/m/Y') ) ?></td>
+                    <td><?= h($resultado->fecha_modificacion->format('d/m/Y') ) ?></td>
+                    <td>
+                        <?= $this->Html->link(__('Ver'), ['action' => 'view', $resultado->muestra_id], ['class' => 'button']) ?>
+                    </td>
+                    <td>
+                        <?= $this->Html->link(__('Editar'), ['action' => 'edit', $resultado->muestra_id], ['class' => 'button']) ?>
+                    </td>
+                    <td>
                         <?= $this->Form->postLink(
-                            __('Delete'),
+                            __('Eliminar'),
                             ['action' => 'delete', $resultado->muestra_id],
                             [
                                 'method' => 'delete',
-                                'confirm' => __('Are you sure you want to delete # {0}?', $resultado->muestra_id),
+                                'confirm' => __('¿Está seguro de que desea eliminar el resultado con el ID # {0}?', $resultado->muestra_id),
+                                'class' => 'button'
                             ]
                         ) ?>
                     </td>
@@ -48,12 +55,12 @@
     </div>
     <div class="paginator">
         <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->first('<< ' . __('primero')) ?>
+            <?= $this->Paginator->prev('< ' . __('anterior')) ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
+            <?= $this->Paginator->next(__('Siguiente') . ' >') ?>
+            <?= $this->Paginator->last(__('último') . ' >>') ?>
         </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
+        <p><?= $this->Paginator->counter(__('Página {{page}} de {{pages}}, mostrando {{current}} registro(s) de {{count}} total')) ?></p>
     </div>
 </div>
