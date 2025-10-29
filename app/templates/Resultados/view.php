@@ -17,11 +17,11 @@
     </aside>
     <div class="column column-80">
         <div class="resultados view content">
-            <h3><?= h($resultado->muestra_id) ?></h3>
+            <h3><?= $resultado->hasValue('muestra') ? h($resultado->muestra->codigo_muestra) : '' ?></h3>
             <table>
                 <tr>
                     <th><?= __('Muestra') ?></th>
-                    <td><?= $resultado->hasValue('muestra') ? $this->Html->link($resultado->muestra->nro_precinto, ['controller' => 'Muestras', 'action' => 'view', $resultado->muestra->id]) : '' ?></td>
+                    <td><?= $resultado->hasValue('muestra') ? $this->Html->link($resultado->muestra->codigo_muestra, ['controller' => 'Muestras', 'action' => 'view', $resultado->muestra->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Materiales Inertes') ?></th>

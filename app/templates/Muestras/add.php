@@ -7,15 +7,15 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Muestras'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <h4 class="heading"><?= __('Acciones') ?></h4>
+            <?= $this->Html->link(__('Listar Muestras'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column column-80">
         <div class="muestras form content">
             <?= $this->Form->create($muestra) ?>
             <fieldset>
-                <legend><?= __('Add Muestra') ?></legend>
+                <legend><?= __('Agregar Muestra') ?></legend>
                 <?php
                     echo $this->Form->control('nro_precinto');
                     echo $this->Form->control('empresa');
@@ -23,7 +23,7 @@
                     echo $this->Form->control('cantidad_semillas', ['type' => 'number', 'min' => '0']);
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->button(__('Enviar')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

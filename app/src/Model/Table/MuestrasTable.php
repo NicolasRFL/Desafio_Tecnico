@@ -66,8 +66,8 @@ class MuestrasTable extends Table
                 ->count();
 
             $entity->codigo_muestra = sprintf(
-                'MUE-%s-%04d',
-                date('Ymd'),
+                'MUE-%s-%03d',
+                date('dmY'),
                 $countToday + 1
             );
         }

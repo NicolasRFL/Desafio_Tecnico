@@ -45,7 +45,22 @@ Nota: La base de datos se inicializa automáticamente usando los scripts init-de
 ```text
 docker compose exec app bash -c 'cd /var/www/html/app && chmod +x runtests.sh && ./runtests.sh'
 ```
+## Integración Continua (CI) con GitHub Actions
 
+Este repositorio tiene configurado un flujo de GitHub Actions que se ejecuta automáticamente cuando se realizan cambios en la rama main.
+
+El workflow ejecuta:
+
+- Las pruebas de modelo configuradas en CakePHP.
+
+- La verificación de que la aplicación se pueda instalar y ejecutar correctamente.
+
+Esto permite asegurar la calidad del código y evitar que se introduzcan cambios que rompan el funcionamiento del proyecto.
+
+El pipeline se encuentra en:
+```text
+.github/workflows/tests.yml
+```
 # Base de datos de ejemplo
 
 El proyecto incluye scripts para crear y poblar la base de datos:

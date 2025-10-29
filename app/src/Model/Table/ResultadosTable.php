@@ -68,7 +68,7 @@ class ResultadosTable extends Table
     {
         $validator
             ->integer('muestra_id')
-            ->notEmptyString('muestra_id');
+            ->notEmptyString('muestra_id','Debe seleccionar una muestra.');
 
         $validator
             ->decimal('poder_germinativo')

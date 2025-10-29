@@ -23,6 +23,7 @@
                         'options' => $muestras,
                         'empty' => __('Seleccione una muestra'),
                         'label' => __('Código de Muestra'),
+                        'required' => true
                     ]);
                     echo $this->Form->control('poder_germinativo',
                         [
