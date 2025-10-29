@@ -7,22 +7,24 @@ Este repositorio contiene la aplicación de carga y gestión de Muestras de Semi
 ### Requisitos
 
 - [Docker](https://www.docker.com/) y [Docker Compose](https://docs.docker.com/compose/)
-- Variables de entorno definidas en `.env`:
-
-```text
-DB_USER=usuario
-DB_PASS=contraseña
-ROOT_PASS=rootpassword
-```
 
 # Pasos para levantar la aplicación
 
 ## Clonar el repositorio:
 
-git clone https://github.com/NicolasRFL/Desafio_Tecnico.git
+```bash
+git clone https://github.com/NicolasRFL/Sistema-gestion-muestras-INASE
 
-cd Desafio_Tecnico
+cd Sistema-gestion-muestras-INASE
+```
 
+## Configuración de entorno
+
+Copiar el archivo `.env.example` a `.env`:
+
+```bash
+cp .env.example .env
+```
 
 ## Levantar los contenedores:
 
