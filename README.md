@@ -57,3 +57,5 @@ desarrollo.sql → Inserta datos de ejemplo
 ## Esquema de la base de datos
 
 Resumen de tablas y relaciones:
+
+<img width="703" height="287" alt="image" src="https://github.com/user-attachments/assets/4c3707ef-bdfd-401d-b347-7cd1a5d0f78d" />
