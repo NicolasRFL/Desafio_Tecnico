@@ -45,6 +45,14 @@ class ResultadosController extends AppController
     public function add()
     {
         $resultado = $this->Resultados->newEmptyEntity();
+        $muestraId = $this->request->getQuery('muestra_id');
+        $codigoMuestra = $this->request->getQuery('codigo_muestra');
+
+        if ($muestraId && $codigoMuestra) {
+            $resultado->muestra_id = $muestraId;
+            $this->set('codigo_muestra', $codigoMuestra);
+        }
+
         if ($this->request->is('post')) {
             $resultado = $this->Resultados->patchEntity($resultado, $this->request->getData());
             if ($this->Resultados->save($resultado)) {
@@ -59,7 +67,7 @@ class ResultadosController extends AppController
         $muestras = $this->Resultados->Muestras->find('list',keyField:'id',valueField:'codigo_muestra')
         ->whereNotInList('id', $usedMuestras)
         ->toArray();
-        $this->set(compact('resultado', 'muestras'));
+        $this->set(compact('resultado', 'muestras', 'muestraId', 'codigoMuestra'));
     }
 
     /**

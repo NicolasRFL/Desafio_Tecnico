@@ -21,7 +21,12 @@
             <?php if (empty($muestra->resultados)): ?>
                 <?= $this->Html->link(
                     'Agregar resultado',
-                    ['controller' => 'Resultados', 'action' => 'add', '?' => ['muestra_id' => $muestra->id]],
+                    [
+                        'controller' => 'Resultados', 
+                        'action' => 'add',
+                        '?' => ['muestra_id' => $muestra->id,
+                                'codigo_muestra' => $muestra->codigo_muestra]
+                    ],
                     ['class' => 'button']
                 ) ?>
             <?php else: ?>

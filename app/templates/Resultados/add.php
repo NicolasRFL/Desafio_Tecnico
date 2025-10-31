@@ -9,7 +9,7 @@
     <aside class="column">
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Resultados'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('Listar Resultados'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column column-80">
@@ -23,6 +23,7 @@
                         'options' => $muestras,
                         'empty' => __('Seleccione una muestra'),
                         'label' => __('Código de Muestra'),
+                        'default' => $muestraId ?? null,
                         'required' => true
                     ]);
                     echo $this->Form->control('poder_germinativo',

@@ -17,7 +17,7 @@ class MuestrasController extends AppController
      */
     public function index()
     {
-        $query = $this->Muestras->find();
+        $query = $this->Muestras->find()->contain(['Resultados'])  ;
         $muestras = $this->paginate($query);
 
         $this->set(compact('muestras'));
